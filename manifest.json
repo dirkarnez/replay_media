@@ -1,0 +1,15 @@
+{
+  "name": "Replay Media",
+  "description" : "Replay file:// media",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["file://*"],
+      "js": ["index.js"]
+    }
+  ],
+  "manifest_version": 2
+}
