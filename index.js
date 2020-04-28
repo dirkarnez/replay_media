@@ -1,6 +1,6 @@
 function addToHistory(decodedSourceSrc) {
     var history = getHistory();
-    history.push({listenedAt: new Date().toDateString(), songFile: decodedSourceSrc })
+    history.push({listenedAt: new Date().getTime(), songFile: decodedSourceSrc })
     localStorage.setItem("history", JSON.stringify(history))
 }
 
@@ -57,7 +57,9 @@ play(decodedSourceSrc);
 
 getHistory().forEach(item => {
     var li = document.createElement("li");
-    li.appendChild(document.createTextNode(item.songFile + " at " + item.listenedAt));
+    var listenedAt = new Date();
+    listenedAt.setTime(item.listenedAt);
+    li.appendChild(document.createTextNode(`${item.songFile.substring(item.songFile.lastIndexOf("/") + 1, item.songFile.length)} - ${listenedAt.getDate()}/${listenedAt.getMonth() + 1}`));
     li.addEventListener("click", function () {
         addToHistory(item.songFile);
         play(item.songFile);
@@ -89,6 +91,7 @@ addStyle(`
 
     article {
         grid-area: main;
+        padding: 1rem;
     }
 
     * {
@@ -107,10 +110,6 @@ addStyle(`
         height: calc(100vh - 54px);
         overflow-y: auto;
     }
-    
-    nav, article {
-        padding: 1rem;
-    }
 
     .player {
         position: unset;
@@ -118,6 +117,17 @@ addStyle(`
         height: 54px;
         background-color: #F1F3F4;
         border-radius: 5px;
+    }
+
+    #history {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #history li {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
     }
 `);
 
