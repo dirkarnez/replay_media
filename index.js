@@ -104,6 +104,7 @@ addStyle(`
     }
 
     nav, article {
+        height: calc(100vh - 54px);
         overflow-y: auto;
     }
     
