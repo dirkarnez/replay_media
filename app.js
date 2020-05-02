@@ -38,7 +38,6 @@ function play(decodedSourceSrc) {
 
     var newPlayer = document.createElement("video");
     newPlayer.className = "player";
-    newPlayer.loop = true;
     newPlayer.controls = true;
     newPlayer.appendChild(newSource);
 
